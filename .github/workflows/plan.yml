@@ -1,0 +1,28 @@
+name: Terraform plan
+run-name: ""
+
+on:
+    workflow_dispatch:
+        inputs:
+            TERRAFORM_GITHUB_RUNNER:
+                default: "ubuntu-latest"
+                type: string
+
+permissions:
+    id-token: write
+    issues: write
+    contents: read
+    pull-requests: write
+    checks: write
+    actions: write
+
+jobs:
+    terraform_plan:
+        name: "Terraform Plan"
+        runs-on: ${{ inputs.TERRAFORM_GITHUB_RUNNER }}
+        environment: ${{ vars.deploy_env }}
+        steps:
+            - name: test output
+              run: |
+                echo "Message for environment: ${msg}"
+
